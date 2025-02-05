@@ -1,0 +1,41 @@
+﻿<Window x:Class="eimg.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:eimg"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Encrypted Image Viewer" Height="450" Width="800" WindowState="Maximized">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="ExitCommand_Executed"/>
+    </Window.CommandBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu x:Name="TopMenu" Grid.Row="0" Background="White">
+            <MenuItem Header="File">
+                <MenuItem Header="Create" InputGestureText="Ctrl+N" Command="ApplicationCommands.New" />
+                <MenuItem Header="Open..." InputGestureText="Ctrl+O" Command="ApplicationCommands.Open" />
+                <Separator />
+                <MenuItem Header="Exit" InputGestureText="Alt+F4" Command="ApplicationCommands.Close" />
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem x:Name="ForgottenPassword" Header="Forgot your password?" Click="ForgottenPassword_Click" />
+                <MenuItem x:Name="About" Header="About" Click="About_Click" />
+            </MenuItem>
+        </Menu>
+
+        <local:ZoomBorder Grid.Row="1" x:Name="border" ClipToBounds="True" Background="White">
+            <Image x:Name="DisplayedImage" Stretch="Uniform" />
+        </local:ZoomBorder>
+
+    </Grid>
+</Window>
